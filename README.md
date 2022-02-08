@@ -60,13 +60,38 @@ AI Stack is using a self-signed certificate. Run the following, to download the 
 ```
 
 # Usage Guide
+- Prepend `sudo` if you use `sudo docker ls` instead of `docker ls`.
+- Prepend `wsl` (e.g. `wsl sudo ./runnersAdd.sh`) if you're using WSL.
+
 ## Adding a Machine to CI/CD Runners
 A Runner is a process hosted by a machine, which takes CI/CD jobs to run.
 
-To let a Machine contribute as a Runner, run the following script:
+To let a Machine contribute as a Runner:
+1. Edit `runnersAdd.sh`
+2. Scroll to the function definition for `register()`, and look at the `docker run` command:
 ```sh
-./runnersAdd.sh
+docker run --rm -it \
+    -v $VOL:/etc/gitlab-runner \
+    gitlab/gitlab-runner:latest register \
+    --non-interactive \
+    --url $GITLAB_URL \
+    --registration-token $TOKEN \
+    --name "$NAME-$(hostname)" \
+    --tag-list "linux, docker, cuda, gpu, sonarqube" \
+    --docker-image "alpine:latest" \
+    --docker-gpus "all" \
+    --docker-volumes "/var/run/docker.sock:/var/run/docker.sock" \
+    --docker-pull-policy="always" \
+    --docker-pull-policy="if-not-present" \
+    --executor "docker" \
+    --run-untagged="true" \
+    --locked="false"
 ```
+3. Edit the `docker run` command parameters. You may consider modifying or deleting:
+    - `tag-list` to indicate your machine capabilities
+    - `docker-gpus` to provide GPU capabilities
+    - `run-untagged` to dictate what jobs it should accept
+4. When all edits are saved, execute `./runnersAdd.sh`.
 
 To inspect all Runners available to you, run `./runnersInspect.sh`.
 
