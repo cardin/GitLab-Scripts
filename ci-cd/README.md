@@ -44,6 +44,7 @@ Create a file called `credentials.sh`, and populate it as follows:
 
 ```sh
 #!/usr/bin/env bash
+GITLAB_HOSTNAME="gitlab.myexample.com"
 TOKEN_PERSONAL="<PERSONAL TOKEN>"
 TOKENS_CICD=(
     "<PRJ/GRP NAME> <PRJ/GRP ID> <PRJ/GRP TOKEN>"
@@ -51,7 +52,9 @@ TOKENS_CICD=(
     )
 ```
 
-You can insert as many Group/Project tokens as you want
+Note:
+- You can insert as many Group/Project tokens as you want
+- If your GitLab is at `https://gitlab.mysite.com/`, then `GITLAB_HOSTNAME` is `gitlab.mysite.com`
 
 
 ## Self-Signed Certificate
@@ -77,8 +80,7 @@ If it fails, check that you are using an updated version of OpenSSL that support
 
 ## Set Configurations
 1. Edit `include.sh`
-2. Set `GITLAB_HOSTNAME` and `SELF_SIGNED` fields to the appropriate values
-    - E.g. if your GitLab is at `https://gitlab.mysite.com/`, then your `GITLAB_HOSTNAME` is `gitlab.mysite.com`
+2. Set `SELF_SIGNED` field to the appropriate values
 
 ## Adding a Machine to CI/CD Runners
 A Runner is a process hosted by a machine, which takes CI/CD jobs to run.

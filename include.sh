@@ -4,7 +4,6 @@ source $SCRIPT_DIR/credentials.sh
 
 ################################################
 # Change these parameters
-GITLAB_HOSTNAME="..."
 GITLAB_URL="https://$GITLAB_HOSTNAME"
 SELF_SIGNED=1
 ################################################
