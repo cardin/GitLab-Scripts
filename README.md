@@ -4,7 +4,9 @@ Scripts to help with GitLab CI/CD management.
 
 # Requirements
 - a Linux, or a Windows with WSL
-- Docker installed
+- Docker
+- jq tool
+- OpenSSL 1.1+ (with TLS 1.3) 
 
 
 # Credential Setup
@@ -57,6 +59,16 @@ If your GitLab is using a self-signed cert, run the following to download the ce
 ./certDownload.sh
 # will generate a .crt file
 ```
+
+You should see the following confirmation code:
+```
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+...
+Verify return code: 0 (ok)
+```
+If it fails, check that you are using an updated version of OpenSSL that supports TLS 1.3.
+
+
 
 # Usage Guide
 - Prepend `sudo` if you use `sudo docker ls` instead of `docker ls`.

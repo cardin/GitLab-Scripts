@@ -11,3 +11,6 @@ get_self_signed_cert() {
 get_self_signed_cert $GITLAB_HOSTNAME
 
 echo | openssl s_client -CAfile $GITLAB_HOSTNAME.crt -connect $GITLAB_HOSTNAME:443
+
+echo "If you get 'Verify return code: 21 (unable to verify the first certificate)', \
+make sure you are using the latest OpenSSL version"
