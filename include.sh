@@ -2,8 +2,9 @@
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 source $SCRIPT_DIR/credentials.sh
 
-GITLAB_URL="https://gitlab.ai-stack.dso/"
-GITLAB_HOSTNAME="gitlab.ai-stack.dso"
+GITLAB_HOSTNAME="..."
+GITLAB_URL="https://$GITLAB_HOSTNAME/"
+SELF_SIGNED=1
 VOL=gitlab-runner
 
 if [[ ! $(command -v jq) ]]; then

@@ -7,7 +7,7 @@ set -e
 create_docker() {
 	VOL=$1
 
-	if [[ ! -f "$GITLAB_HOSTNAME.crt" ]]; then
+	if [[ $SELF_SIGNED && ! -f "$GITLAB_HOSTNAME.crt" ]]; then
 		echo "Cert $GITLAB_HOSTNAME.crt is missing! Run certDownload.sh first!"
 		exit 1
 	fi
@@ -16,7 +16,10 @@ create_docker() {
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $VOL:/etc/gitlab-runner \
 		gitlab/gitlab-runner:latest
-	docker cp "$GITLAB_HOSTNAME.crt" "gl-runner-$(hostname)":"/etc/gitlab-runner/certs/"
+
+	if [[ $SELF_SIGNED ]]; then
+		docker cp "$GITLAB_HOSTNAME.crt" "gl-runner-$(hostname)":"/etc/gitlab-runner/certs/"
+	fi
 }
 
 register() {

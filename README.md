@@ -5,7 +5,6 @@ Scripts to help with GitLab CI/CD management.
 # Requirements
 - a Linux, or a Windows with WSL
 - Docker installed
-- Connection to the AI Stack
 
 
 # Credential Setup
@@ -53,7 +52,7 @@ You can insert as many Group/Project tokens as you want
 
 
 ## Self-Signed Certificate
-AI Stack is using a self-signed certificate. Run the following, to download the cert that allows the scripts to authenticate properly:
+If your GitLab is using a self-signed cert, run the following to download the cert that allows the scripts to authenticate properly:
 ```sh
 ./certDownload.sh
 # will generate a .crt file
@@ -62,6 +61,11 @@ AI Stack is using a self-signed certificate. Run the following, to download the 
 # Usage Guide
 - Prepend `sudo` if you use `sudo docker ls` instead of `docker ls`.
 - Prepend `wsl` (e.g. `wsl sudo ./runnersAdd.sh`) if you're using WSL.
+
+## Set Configurations
+1. Edit `include.sh`
+2. Set `GITLAB_HOSTNAME` and `SELF_SIGNED` fields to the appropriate values
+    - E.g. if your GitLab is at `https://gitlab.mysite.com/`, then your `GITLAB_HOSTNAME` is `gitlab.mysite.com`
 
 ## Adding a Machine to CI/CD Runners
 A Runner is a process hosted by a machine, which takes CI/CD jobs to run.
