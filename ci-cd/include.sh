@@ -7,6 +7,7 @@ source $SCRIPT_DIR/credentials.sh
 GITLAB_HOSTNAME="..."
 GITLAB_URL="https://$GITLAB_HOSTNAME"
 SELF_SIGNED=1
+VOL=gitlab-runner
 ################################################
 
 if [[ ! $(command -v jq) ]]; then

@@ -69,7 +69,7 @@ delete_failed() {
     PROJ_ID=$1
 
     resp=$(curl --request GET --silent --insecure \
-        "$GITLAB_URL/api/v4/projects/$PROJ_ID/pipelines?order_by=updated_at&sort=desc&status=failed&per_page=100" \
+        "$GITLAB_URL/api/v4/projects/$PROJ_ID/pipelines?order_by=updated_at&sort=asc&status=failed&per_page=100" \
         --header "Authorization: Bearer $TOKEN_PERSONAL")
     pipe_ids=$(echo "$resp" | jq -c ".[:-$MAX_FAILED_PIPES] | [.[] | .id]")
     pipe_id_len=$(echo "$pipe_ids" | jq length)
